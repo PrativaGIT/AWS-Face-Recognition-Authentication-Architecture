@@ -1,0 +1,97 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Image Authentication</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            text-align: center;
+            padding: 20px;
+            background-color: #f4f4f4;
+        }
+        form {
+            margin: 20px auto;
+            padding: 20px;
+            border: 1px solid #ccc;
+            background-color: #fff;
+            border-radius: 8px;
+            max-width: 400px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        input[type="file"] {
+            margin: 10px 0;
+        }
+        button {
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            padding: 10px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+        button:hover {
+            background-color: #45a049;
+        }
+        #response-message {
+            margin-top: 20px;
+            padding: 10px;
+            border-radius: 5px;
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <h1>Upload Image for Authentication</h1>
+    <form id="upload-form" enctype="multipart/form-data">
+        <label for="image">Choose an image:</label><br>
+        <input type="file" id="image" name="image" accept="image/*" required><br><br>
+        <button type="submit">Upload</button>
+    </form>
+    <div id="response-message"></div>
+
+    <script>
+        document.getElementById('upload-form').addEventListener('submit', async (event) => {
+            event.preventDefault();
+
+            const formData = new FormData();
+            const imageFile = document.getElementById('image').files[0];
+            if (!imageFile) {
+                alert("Please select an image file.");
+                return;
+            }
+
+            formData.append('image', imageFile);
+
+            try {
+                const response = await fetch('/authenticate', {
+                    method: 'POST',
+                    body: formData
+                });
+
+                const responseMessage = document.getElementById('response-message');
+                responseMessage.style.display = 'block';
+
+                if (response.ok) {
+                    const data = await response.json();
+                    responseMessage.style.backgroundColor = '#d4edda';
+                    responseMessage.style.color = '#155724';
+                    responseMessage.textContent = data.message;
+                } else {
+                    const errorData = await response.json();
+                    responseMessage.style.backgroundColor = '#f8d7da';
+                    responseMessage.style.color = '#721c24';
+                    responseMessage.textContent = errorData.message || 'An error occurred.';
+                }
+            } catch (error) {
+                const responseMessage = document.getElementById('response-message');
+                responseMessage.style.display = 'block';
+                responseMessage.style.backgroundColor = '#f8d7da';
+                responseMessage.style.color = '#721c24';
+                responseMessage.textContent = 'An unexpected error occurred. Please try again.';
+            }
+        });
+    </script>
+</body>
+</html>
