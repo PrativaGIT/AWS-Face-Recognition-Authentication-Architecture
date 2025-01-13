@@ -2,7 +2,8 @@
 
 This project demonstrates a facial recognition-based authentication system using AWS services and Python. It enables secure employee authentication by leveraging Amazon Rekognition, DynamoDB, API Gateway, and Lambda functions.
 
-![image alt](https://github.com/PrativaGIT/AWS-Face-Recognition-Authentication-Architecture/blob/ee5cb87914176bf686ad9b949fb0664c19520977/Architecture.png)
+![Architecture](https://github.com/user-attachments/assets/4149690e-88d1-4c65-b7f8-c44640a3e88e)
+
 ---
 
 ## **Architecture Overview**
