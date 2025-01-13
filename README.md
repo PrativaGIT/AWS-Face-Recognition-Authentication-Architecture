@@ -2,7 +2,7 @@
 
 This project demonstrates a facial recognition-based authentication system using AWS services and Python. It enables secure employee authentication by leveraging Amazon Rekognition, DynamoDB, API Gateway, and Lambda functions.
 
-![Architecture](https://github.com/user-attachments/assets/4149690e-88d1-4c65-b7f8-c44640a3e88e)
+![Architecture](https://github.com/user-attachments/assets/973b32e3-6e94-498f-bde1-78856de698e3)
 
 ---
 
